@@ -7,6 +7,7 @@ __pycache__/
 *.so
 
 # Distribution / packaging
+v_ecom
 .Python
 build/
 develop-eggs/

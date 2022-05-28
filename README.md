@@ -1,2 +1,2 @@
-# socialApplication
-Django social application
+# ecommerceApplication
+Django Ecommerce application
