@@ -23,6 +23,7 @@
   <th scope="col">Product</th>
   <th scope="col" width="120">Quantity</th>
   <th scope="col" width="120">Price</th>
+  <th scope="col" width="120">Total</th>
   <th scope="col" class="text-right" width="200"> </th>
 </tr>
 </thead>
@@ -36,7 +37,13 @@
 			<div class="aside"><img src="{{ cart_item.product.images.url }}" class="img-sm"></div>
 			<figcaption class="info">
 				<a href="{{ cart_item.product.get_url }}" class="title text-dark">{{ cart_item.product.product_name }}</a>
-				{% comment %} <p class="text-muted small">Color: 25 Mpx <br> Size: Canon</p> {% endcomment %}
+				<p class="text-muted small">
+					{% if cart_item.variations.all %}
+					  {% for item in cart_item.variations.all %}
+					   	{{ item.variation_category | capfirst }} : {{ item.variation_value | capfirst }} <br>
+					  {% endfor %}
+					{% endif %}
+				</p>
 			</figcaption>
 		</figure>
 	</td>
@@ -56,8 +63,12 @@
 	</td>
 	<td> 
 		<div class="price-wrap"> 
-			{% comment %} <var class="price">&#8377; {{ cart_item.product.price * cart_item.quantity }}</var>  {% endcomment %}
 			<small class="text-muted"> &#8377; {{ cart_item.product.price }} each </small> 
+		</div> <!-- price-wrap .// -->
+	</td>
+	<td> 
+		<div class="price-wrap"> 
+			<var class="total">&#8377; {% widthratio cart_item.product.price 1 cart_item.quantity %}</var>
 		</div> <!-- price-wrap .// -->
 	</td>
 	<td class="text-right"> 
